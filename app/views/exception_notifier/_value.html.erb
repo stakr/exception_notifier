@@ -1,0 +1,21 @@
+<% if value.blank? %>
+  <code>[NIL]</code>
+<% elsif value.is_a?(ActionController::UploadedFile) %>
+  <var>[FILE: <%= h value.original_filename %>]</var>
+<% elsif value.is_a?(Hash) %>
+  <dl>
+    <% value.keys.sort_by(&:to_s).each do |k| %>
+      <% v = value[k] %>
+      <dt><%= h k %></dt>
+      <dd>
+        <% if k.to_s.include? 'password' %>
+          <code>[FILTERED]</code>
+        <% else %>
+          <%= render :partial => 'exception_notifier/value', :locals => { :value => v } %>
+        <% end %>
+      </dd>
+    <% end %>
+  </dl>
+<% else %>
+  <%= h value %>
+<% end %>

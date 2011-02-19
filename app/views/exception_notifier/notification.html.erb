@@ -1,0 +1,39 @@
+<h1>
+  A <%= h @exception.class %>
+  occurred on <%= h @request.host_with_port -%>
+  in <%= h @klass %>
+</h1>
+<p><%= h @exception.message %></p>
+
+<h2>Request</h2>
+
+<p><%= h "#{@request.protocol}#{@request.host_with_port}#{@request.request_uri}" %></p>
+<%= render :partial => 'exception_notifier/value', :locals => { :value => @request.parameters } %>
+
+<h2>User</h2>
+
+<% if @user %> 
+  <% if @user.respond_to?(:full_name) && @user.respond_to?(:email) %>
+    <p><%= h "#{@user.full_name} <#{@user.email}> (#{@user.id})" %></p>
+  <% else %>
+    <%= render :partial => 'exception_notifier/value', :locals => { :value => @user.attributes } %>
+  <% end %>
+<% else %>
+  <p>No user logged in</p>
+<% end %>
+
+<h2>Session</h2>
+
+<%= render :partial => 'exception_notifier/value', :locals => { :value => @request.session.to_hash } %>
+
+<h2>Backtrace</h2>
+
+<pre>
+  <%= h @backtrace.join("\n  ") %>
+</pre>
+
+<hr />
+
+<h2>Environment</h2>
+
+<%= render :partial => 'exception_notifier/value', :locals => { :value => @request.env } %>
