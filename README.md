@@ -1,15 +1,15 @@
-== Exception Notifier
+# Exception Notifier
 
-Written by stakr GbR (Jan Sebastian Siwy, Martin Spickermann, Henning Staib GbR; http://stakr.de)
+Written by stakr GbR (Jan Sebastian Siwy, Martin Spickermann, Henning Staib GbR; http://www.stakr.de/)
 
-Source: http://svn.stakr.de/rails/plugins/exception_notifier
+Source: https://github.com/stakr/exception_notifier
 
 A small plugin which sends email notifications about exceptions.
 
 Requires Rails >= 2.3
 
 
-=== Integration
+## Integration
 
 Just add the following code fragment into your `application_controller.rb`
 
@@ -29,12 +29,12 @@ Just add the following code fragment into your `application_controller.rb`
     end
 
 
-=== Example
+## Example
 
-    ExceptionNotifier.deliver_notification( 'exceptions@domain.tld', 
-                                            'development team <dev@domain.tld>, <bug-tracker@domain.tld>', 
-                                            self, 
-                                            exception, 
+    ExceptionNotifier.deliver_notification( 'exceptions@domain.tld',
+                                            'development team <dev@domain.tld>, <bug-tracker@domain.tld>',
+                                            self,
+                                            exception,
                                             @current_user )
 
 Remember that you need a well configurated `ActionMailer`, e.g.
